@@ -1,6 +1,38 @@
 import random
 import time
 from datetime import datetime
+import streamlit as st
+# Sayfa Ayarları
+st.set_page_config(page_title="EVEYES 360 -HASTANE1", layout="wide")
+
+st.title("🛡️""EVEYES 360 -HASTANE1")
+st.markdown("---")
+
+# Yan Menü (Sidebar) - Kayıt ve Seçenekler
+with st.sidebar:
+    st.header("Hasta Giriş Paneli")
+    patient_id = st.text_input("Hasta ID", value="P-999")
+    language = st.selectbox("Dil / Language", ["Türkçe", "English", "Arabic"])
+    start_test = st.button("Süreci Başlat")
+
+# Ana Ekran
+if start_test:
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.subheader("📊 Canlı Hayati Bulgular")
+        # Önceki kodundaki 'vitals' verilerini buraya bağlıyoruz
+        st.metric(label="Vücut Isısı", value="38.7 °C", delta="Kritik!", delta_color="inverse")
+        st.metric(label="Nabız", value="73 BPM", delta="Normal")
+
+    with col2:
+        st.subheader("🎵 Biosonoloji & Terapi")
+        st.info("Aktif Makam: **Nihavend**")
+        st.write("Frekans: 432 Hz - Hücresel Stabilizasyon Modu")
+
+    st.markdown("---")
+    st.subheader("👨‍⚕️ Doktor Karar Destek Paneli")
+    st.warning("ÖNERİ: Akut Apandisit Şüphesi - USG İstenmesi Önerilir.")
 
 # 1. EN ÜSTTE: Yardımcı Sınıflar (Araçlar)
 class VIPClassifier:
@@ -351,4 +383,5 @@ def run_clinical_test():
         print("="*50)
 
 if __name__ == "__main__":
+
     run_clinical_test()
